@@ -5,6 +5,12 @@
             "name": "http://127.0.0.1:3000/recipes.html",
             "request": "launch",
             "url": "http://127.0.0.1:3000/recipes.html"
+        },
+        {
+            "type": "pwa-msedge",
+            "name": "http://127.0.0.1:3000/Vue.html",
+            "request": "launch",
+            "url": "http://127.0.0.1:3000/Vue.html"
         }
     ]
 }
