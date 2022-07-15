@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/bulma-prefers-dark" />
     <script src="https://unpkg.com/vue@3"></script>
+    <script src="recipe_list.js"></script>
 </head>
 <body>
 <div id="app">
@@ -80,9 +81,7 @@
   const app=createApp({
     data() {
       return {
-        recipes: [
-            "Chicken", "Egg Rice", "Salmon", "Fried Chicken"
-        ]
+        recipes: recipes 
 
 
       }
