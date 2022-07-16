@@ -43,7 +43,7 @@ const recipes = [
     },
     {
         name: "Tumeric cauliflower",
-        ingredients: ["Cauliflower florets", "tumeric", "gojuchang", "lime", "cilantro", "olive oil" "basmati rice", ],
+        ingredients: ["Cauliflower florets", "tumeric", "gojuchang", "lime", "cilantro", "olive oil", "basmati rice", ],
         source: "Antoni Porowski",
     },
     {
@@ -100,5 +100,5 @@ const recipes = [
         ingredients: ["tomato", "bread", "cream cheese", "balsamic"],
         source: "Khavoy", 
     },
-],
+]
 
