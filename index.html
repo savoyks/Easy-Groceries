@@ -31,16 +31,10 @@
     </nav>
     <section class="section">
         <div class="container">
-            <h1 class="title">Grocery List</h1>
+            <h1 class="title">Savoy Family Meals</h1>
             <div class="columns is-desktop">
                 <div class="column" v-for="recipe in recipes">
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image is-4by3">
-                                <img src="https://healthyrecipesblogs.com/wp-content/uploads/2019/03/baked-salmon-featured-2021.jpg"
-                                    alt="Placeholder image">
-                            </figure>
-                        </div>
+                    <div class="card">        
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-left">
@@ -50,15 +44,14 @@
                                     </figure>
                                 </div>
                                 <div class="media-content">
-                                    <p class="title is-4">Kristen</p>
-                                    <p class="subtitle is-5">Kristen's {{recipe}}</p>
+                                    <p class="title is-4">{{recipe.name}}</p>
+                                    <p class="subtitle is-5">{{recipe.source}}</p>
                                 </div>
                             </div>
                             <div class="content">
-                                <ol type="1">
-                                    <li>Salmon</li>
-                                    <li>Lemon</li>
-                                    <li>Olive oil</li>
+                                <ol type="1" > 
+                                    
+                                    <li v-for="ingredient in recipe.ingredients">{{ingredient}}</li>
 
                                 </ol>
                             </div>
