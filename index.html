@@ -32,7 +32,7 @@
     <section class="section">
         <div class="container">
             <h1 class="title">Savoy Family Meals</h1>
-            <div class="columns is-desktop">
+            <div class="columns is-desktop"> 
                 <div class="column" v-for="recipe in selected_recipes">
                     <div class="card">        
                         <div class="card-content">
@@ -50,9 +50,9 @@
                             </div>
                             <div class="content">
                                 <ol type="1" > 
-                                    
-                                    <li v-for="ingredient in recipe.ingredients">{{ingredient}}</li>
-
+                                    <li v-for="ingredient in recipe.ingredients">
+                                        {{capitalizeFirstLetter(ingredient)}}
+                                    </li>
                                 </ol>
                             </div>
                         </div>
@@ -61,6 +61,18 @@
                 
                 
             </div>
+            <section class="section is-small">
+                <h1 class="title">Grocery List</h1>
+                <div class="content">
+                    <ul v-for="recipe in selected_recipes">
+                        
+                        <li v-for= "ingredient in recipe.ingredients">
+                            {{capitalizeFirstLetter(ingredient)}}
+                        </li>
+
+                    </ul>
+                </div>
+            </section>
 
 
         </div>
@@ -71,13 +83,13 @@
 <script>
   const { createApp } = Vue
   function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
     }
-    return a;
-}
-
+  
   const app=createApp({
     data() {
       return {
@@ -88,6 +100,11 @@
         selected_recipes() {
             const shuffled_recipes = shuffle(this.recipes)
             return shuffled_recipes.slice(0,4)
+        }
+    },
+    methods: {
+        capitalizeFirstLetter(ingredient){
+            return ingredient.charAt(0).toUpperCase() + ingredient.slice(1)
         }
     }
     
