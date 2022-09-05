@@ -7,6 +7,7 @@
     <title>Savoy Family Meals</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/bulma-prefers-dark" />
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3"></script>
     <script src="recipe_list.js"></script>
 </head>
@@ -15,16 +16,8 @@
     <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color: #FBCEB1">
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="recipes.html">
+                <a class="navbar-item" href="index.html">
                     Recipes
-                </a>
-
-                <a class="navbar-item">
-                    Grocery List
-                </a>
-
-                <a class="navbar-item">
-                    Meal Calendar
                 </a>
             </div>
         </div>
@@ -38,10 +31,8 @@
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-left">
-                                    <figure class="image is-48x48">
-                                        <img src="https://bulma.io/images/placeholders/96x96.png"
-                                            alt="Placeholder image">
-                                    </figure>
+                                    <button class="delete" @click="deleteRecipe(recipe.name)">
+                                      </button>
                                 </div>
                                 <div class="media-content">
                                     <p class="title is-4">{{recipe.name}}</p>
@@ -93,18 +84,22 @@
   const app=createApp({
     data() {
       return {
-        recipes: recipes
+        recipes: recipes,
+        shuffled_recipes: shuffle(recipes), 
       }
     },
     computed: {
         selected_recipes() {
-            const shuffled_recipes = shuffle(this.recipes)
-            return shuffled_recipes.slice(0,4)
+            return this.shuffled_recipes.slice(0,4)
         }
     },
     methods: {
         capitalizeFirstLetter(ingredient){
             return ingredient.charAt(0).toUpperCase() + ingredient.slice(1)
+        }, 
+        deleteRecipe(name){
+            this.shuffled_recipes = this.shuffled_recipes.filter(recipe => recipe.name != name)
+            console.log(name)
         }
     }
     
