@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savoy Family Meals</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/bulma-prefers-dark" />
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="recipe_list.js"></script>
+</head>
+<body>
+<div id="app">
+    <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color: #FBCEB1">
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="index.html">
+                    Recipes
+                </a>
+                <a class="navbar-item is-active" href="julai.html">
+                    JulAI
+                </a>
+            </div>
+        </div>
+    </nav>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">JulAI Childs</h1>
+            <textarea class="textarea" placeholder="e.g. What's for dinner?" v-model="prompt"></textarea>
+            <button class="button" @click="askjulai">Go</button>
+            <br>
+            {{ response }}
+            </section>
+
+
+        </div>
+        </div>
+    </section>
+</div>
+
+<script>
+  const { createApp } = Vue
+  
+  const app=createApp({
+    data() {
+      return {
+        prompt: "",
+        response: ""
+
+      }
+    },
+    computed: {
+
+    },
+    methods: {
+        askjulai() {
+            this.response="hi from julai"
+        }
+
+        
+    }
+    
+  }).mount('#app')
+</script>
+</body>
+</html>
