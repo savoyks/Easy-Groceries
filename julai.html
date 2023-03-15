@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/bulma-prefers-dark" />
     <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3"></script>
-    <script src="recipe_list.js"></script>
 </head>
 <body>
 <div id="app">
@@ -29,9 +28,9 @@
         <div class="container">
             <h1 class="title">JulAI Childs</h1>
             <textarea class="textarea" placeholder="e.g. What's for dinner?" v-model="prompt"></textarea>
-            <button class="button" @click="askjulai">Go</button>
+            <button class="button" :class="{ 'is-loading': isLoading }" @click="askjulai">Go</button> 
             <br>
-            {{ response }}
+            <pre>{{ response }}</pre>
             </section>
 
 
@@ -43,11 +42,13 @@
 <script>
   const { createApp } = Vue
   
+
   const app=createApp({
     data() {
       return {
         prompt: "",
-        response: ""
+        response: "",
+        isLoading: false
 
       }
     },
@@ -56,7 +57,28 @@
     },
     methods: {
         askjulai() {
-            this.response="hi from julai"
+            this.isLoading=true
+            
+            const body = {
+            model: 'gpt-3.5-turbo',
+            messages: [{ role: 'system', content: "You are JulAI Childs, a helpful AI assistant that provides recipes and a sing-a-long based on ingredidents provided in the prompt." }, {role: 'user', content: this.prompt}],
+            };
+
+            fetch('https://api.openai.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${OPENAI_API_KEY}`,
+            },
+            body: JSON.stringify(body),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                const message=data["choices"][0]["message"]["content"]
+                this.response=message
+                this.isLoading=false
+            })
+            .catch((error) => console.error(error));
         }
 
         
