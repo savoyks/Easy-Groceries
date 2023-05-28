@@ -28,7 +28,7 @@
         <div class="container">
             <h1 class="title">JulAI Childs</h1>
             <textarea class="textarea" placeholder="e.g. What's for dinner?" v-model="prompt"></textarea>
-            <button class="button" :class="{ 'is-loading': isLoading }" @click="askjulai">Go</button> 
+            <button class="button" :class="{ 'is-loading': isLoading }" @click="askjulai">Go</button>
             <br>
             <pre>{{ response }}</pre>
             </section>
@@ -41,15 +41,22 @@
 
 <script>
   const { createApp } = Vue
-  
+    function getapikey() {
+    let apikey = localStorage.getItem("openai")
+    if(!apikey) {
+        apikey = prompt("enter openai apikey")
+        localStorage.setItem("openai", apikey)
+    }
+    return apikey
+  }
 
   const app=createApp({
     data() {
       return {
         prompt: "",
         response: "",
-        isLoading: false
-
+        isLoading: false,
+        apikey: getapikey()
       }
     },
     computed: {
@@ -58,7 +65,7 @@
     methods: {
         askjulai() {
             this.isLoading=true
-            
+
             const body = {
             model: 'gpt-3.5-turbo',
             messages: [{ role: 'system', content: "You are JulAI Childs, a helpful AI assistant that provides recipes and a sing-a-long based on ingredidents provided in the prompt." }, {role: 'user', content: this.prompt}],
@@ -68,7 +75,7 @@
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${OPENAI_API_KEY}`,
+                Authorization: `Bearer ${this.apikey}`,
             },
             body: JSON.stringify(body),
             })
@@ -81,9 +88,9 @@
             .catch((error) => console.error(error));
         }
 
-        
+
     }
-    
+
   }).mount('#app')
 </script>
 </body>
